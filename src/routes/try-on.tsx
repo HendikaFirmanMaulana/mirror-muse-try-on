@@ -37,9 +37,10 @@ export const Route = createFileRoute("/try-on")({
 });
 
 function TryOnPage() {
-  const [selectedCategory, setSelectedCategory] = useState(tryOnCategories[0]);
-  const [selectedSample, setSelectedSample] = useState(tryOnCategories[0].samples[0]);
-  const [selectedColor, setSelectedColor] = useState(tryOnColors[0]);
+  const [selectedCategory, setSelectedCategory] =
+    useState<(typeof tryOnCategories)[number]>(tryOnCategories[0]);
+  const [selectedSample, setSelectedSample] = useState<string>(tryOnCategories[0].samples[0]);
+  const [selectedColor, setSelectedColor] = useState<(typeof tryOnColors)[number]>(tryOnColors[0]);
   const [cameraState, setCameraState] = useState<"idle" | "starting" | "active" | "error">("idle");
   const [cameraError, setCameraError] = useState("");
   const [snapshotMessage, setSnapshotMessage] = useState("");
@@ -162,7 +163,7 @@ function TryOnPage() {
           </div>
           <div className="flex min-h-9 items-center gap-2 text-xs font-medium text-muted-foreground">
             <span
-              className={`size-2 rounded-full ${cameraState === "active" ? "bg-emerald-500" : "bg-muted-foreground/50"}`}
+              className={`size-2 rounded-full ${cameraState === "active" ? "bg-primary" : "bg-muted-foreground/50"}`}
             />
             {cameraState === "active" ? "Camera on" : "Preview mode"}
           </div>
@@ -264,12 +265,13 @@ function TryOnPage() {
             </div>
             <div className="mt-4 grid grid-cols-3 gap-2" role="group" aria-label="Accessory categories">
               {tryOnCategories.map(({ name, icon: Icon, ...category }) => (
-                <button
+                <Button
                   key={name}
                   type="button"
+                  variant="outline"
                   aria-pressed={selectedCategory.name === name}
                   onClick={() => changeCategory({ name, icon: Icon, ...category })}
-                  className={`flex min-h-[66px] flex-col items-center justify-center gap-1.5 border px-1.5 py-2 text-[11px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  className={`h-auto min-h-[66px] flex-col gap-1.5 whitespace-normal rounded-sm px-1.5 py-2 text-[11px] font-medium shadow-none ${
                     selectedCategory.name === name
                       ? "border-primary bg-accent text-primary"
                       : "border-border bg-background text-muted-foreground hover:bg-secondary"
@@ -277,7 +279,7 @@ function TryOnPage() {
                 >
                   <Icon className="size-[18px]" strokeWidth={1.7} aria-hidden="true" />
                   {name}
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -295,12 +297,13 @@ function TryOnPage() {
               </div>
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {selectedCategory.samples.map((sample, index) => (
-                  <button
+                  <Button
                     key={sample}
                     type="button"
+                    variant="outline"
                     aria-pressed={selectedSample === sample}
                     onClick={() => setSelectedSample(sample)}
-                    className={`flex min-h-[92px] flex-col items-center justify-center gap-2 border px-2 py-3 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    className={`h-auto min-h-[92px] flex-col gap-2 whitespace-normal rounded-sm px-2 py-3 text-center shadow-none ${
                       selectedSample === sample
                         ? "border-primary bg-accent/50"
                         : "border-border hover:bg-secondary"
@@ -314,7 +317,7 @@ function TryOnPage() {
                       <ActiveIcon className="size-4" aria-hidden="true" />
                     </span>
                     <span className="text-[11px] font-medium leading-4 text-foreground">{sample}</span>
-                  </button>
+                  </Button>
                 ))}
               </div>
               <div className="mt-6 border-t border-border pt-5">
