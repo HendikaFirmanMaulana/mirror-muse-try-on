@@ -1,3 +1,3 @@
 - [x] Build the responsive landing page and visual category preview.
 - [x] Build the camera workspace with local catalog selection, camera controls, and snapshot download.
-- [ ] Verify route navigation, responsive rendering, camera fallback, and snapshot download.
+- [x] Verify route navigation, responsive rendering, camera fallback, and snapshot download.
