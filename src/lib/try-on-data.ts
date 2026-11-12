@@ -17,8 +17,14 @@ export type TryOnCategory = {
   samples: readonly string[];
 };
 
+export const defaultTryOnCategory: TryOnCategory = {
+  name: "Glasses",
+  icon: Glasses,
+  samples: ["Sculpted", "Everyday", "Soft tint"],
+};
+
 export const tryOnCategories = [
-  { name: "Glasses", icon: Glasses, samples: ["Sculpted", "Everyday", "Soft tint"] },
+  defaultTryOnCategory,
   { name: "Hair", icon: Waves, samples: ["Soft wave", "Sleek", "Natural"] },
   { name: "Hat", icon: Crown, samples: ["Weekend cap", "Wide brim", "Soft bucket"] },
   { name: "Necklace", icon: Gem, samples: ["Mini pendant", "Layered chain", "Pearl strand"] },
