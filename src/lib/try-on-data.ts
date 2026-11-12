@@ -17,7 +17,7 @@ export type TryOnCategory = {
   samples: readonly string[];
 };
 
-export const tryOnCategories: readonly TryOnCategory[] = [
+export const tryOnCategories = [
   { name: "Glasses", icon: Glasses, samples: ["Sculpted", "Everyday", "Soft tint"] },
   { name: "Hair", icon: Waves, samples: ["Soft wave", "Sleek", "Natural"] },
   { name: "Hat", icon: Crown, samples: ["Weekend cap", "Wide brim", "Soft bucket"] },
@@ -27,7 +27,7 @@ export const tryOnCategories: readonly TryOnCategory[] = [
   { name: "Bracelet", icon: CircleDot, samples: ["Slim chain", "Beaded", "Soft cuff"] },
   { name: "Ring", icon: Circle, samples: ["Sculpted dome", "Stacking", "Classic signet"] },
   { name: "Nails", icon: Paintbrush, samples: ["Short almond", "Soft square", "Classic round"] },
-];
+] as const satisfies readonly [TryOnCategory, ...TryOnCategory[]];
 
 export const tryOnColors = [
   { name: "Lilac", className: "bg-swatch-lilac" },
