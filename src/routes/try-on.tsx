@@ -92,6 +92,8 @@ function TryOnPage() {
       setCameraError(
         name === "NotAllowedError" || name === "PermissionDeniedError"
           ? "Camera permission was declined. Allow camera access in your browser settings to try it live."
+          : name === "NotFoundError" || name === "DevicesNotFoundError"
+            ? "No camera was found on this device. You can still explore the studio preview."
           : "We couldn't start your camera. Check that it's connected and available, then try again.",
       );
       setCameraState("error");
@@ -178,7 +180,7 @@ function TryOnPage() {
 
         <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_340px] xl:gap-7">
           <section aria-label="Camera preview" className="min-w-0">
-            <div className="relative aspect-[4/3] min-h-[320px] max-h-[760px] overflow-hidden rounded-[4px] bg-secondary sm:aspect-[16/10] lg:aspect-[1.18/1] xl:aspect-[1.3/1]">
+            <div className="relative aspect-[4/3] min-h-0 max-h-[760px] overflow-hidden rounded-[4px] bg-secondary sm:aspect-[16/10] lg:aspect-[1.18/1] xl:aspect-[1.3/1]">
               <img
                 ref={imageRef}
                 src={studioPortrait}
@@ -334,20 +336,22 @@ function TryOnPage() {
                 </div>
                 <div className="mt-3 flex flex-wrap gap-2.5" role="group" aria-label="Choose a color">
                   {tryOnColors.map(({ name, className }) => (
-                    <button
+                    <Button
                       key={name}
                       type="button"
+                      variant="ghost"
+                      size="icon"
                       aria-label={name}
                       aria-pressed={selectedColor.name === name}
                       onClick={() => setSelectedColor({ name, className })}
-                      className={`grid size-8 place-items-center rounded-full border border-foreground/10 ${className} outline-offset-2 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+                      className={`grid size-8 place-items-center rounded-full border border-foreground/10 p-0 ${className} outline-offset-2 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
                         selectedColor.name === name ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""
                       }`}
                     >
                       {selectedColor.name === name && (
                         <Check className="size-3.5 text-foreground" aria-hidden="true" />
                       )}
-                    </button>
+                    </Button>
                   ))}
                 </div>
               </div>
