@@ -13,7 +13,12 @@ import {
 import studioPortrait from "@/assets/style-studio-editorial.jpg";
 import { VirtualHeader } from "@/components/virtual-style-shell";
 import { Button } from "@/components/ui/button";
-import { tryOnCategories, tryOnColors } from "@/lib/try-on-data";
+import {
+  defaultTryOnCategory,
+  tryOnCategories,
+  tryOnColors,
+  type TryOnCategory,
+} from "@/lib/try-on-data";
 
 export const Route = createFileRoute("/try-on")({
   head: () => ({
@@ -37,9 +42,8 @@ export const Route = createFileRoute("/try-on")({
 });
 
 function TryOnPage() {
-  const [selectedCategory, setSelectedCategory] =
-    useState<(typeof tryOnCategories)[number]>(tryOnCategories[0]);
-  const [selectedSample, setSelectedSample] = useState<string>(tryOnCategories[0].samples[0]);
+  const [selectedCategory, setSelectedCategory] = useState<TryOnCategory>(defaultTryOnCategory);
+  const [selectedSample, setSelectedSample] = useState<string>(defaultTryOnCategory.samples[0]);
   const [selectedColor, setSelectedColor] = useState<(typeof tryOnColors)[number]>(tryOnColors[0]);
   const [cameraState, setCameraState] = useState<"idle" | "starting" | "active" | "error">("idle");
   const [cameraError, setCameraError] = useState("");
@@ -264,21 +268,21 @@ function TryOnPage() {
               <span className="text-xs text-muted-foreground">09 categories</span>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-2" role="group" aria-label="Accessory categories">
-              {tryOnCategories.map(({ name, icon: Icon, ...category }) => (
+              {tryOnCategories.map((category) => (
                 <Button
-                  key={name}
+                  key={category.name}
                   type="button"
                   variant="outline"
-                  aria-pressed={selectedCategory.name === name}
-                  onClick={() => changeCategory({ name, icon: Icon, ...category })}
+                  aria-pressed={selectedCategory.name === category.name}
+                  onClick={() => changeCategory(category)}
                   className={`h-auto min-h-[66px] flex-col gap-1.5 whitespace-normal rounded-sm px-1.5 py-2 text-[11px] font-medium shadow-none ${
-                    selectedCategory.name === name
+                    selectedCategory.name === category.name
                       ? "border-primary bg-accent text-primary"
                       : "border-border bg-background text-muted-foreground hover:bg-secondary"
                   }`}
                 >
-                  <Icon className="size-[18px]" strokeWidth={1.7} aria-hidden="true" />
-                  {name}
+                  <category.icon className="size-[18px]" strokeWidth={1.7} aria-hidden="true" />
+                  {category.name}
                 </Button>
               ))}
             </div>
