@@ -43,10 +43,11 @@ export const Route = createFileRoute("/try-on")({
 
 function TryOnPage() {
   const [selectedCategory, setSelectedCategory] = useState<TryOnCategory>(defaultTryOnCategory);
-  const [selectedSample, setSelectedSample] = useState<string>(defaultTryOnCategory.samples[0]);
-  const [selectedColor, setSelectedColor] = useState<{ name: string; className: string }>(
-    tryOnColors[0],
-  );
+  const [selectedSample, setSelectedSample] = useState<string>("Sculpted");
+  const [selectedColor, setSelectedColor] = useState<{ name: string; className: string }>({
+    name: tryOnColors[0].name,
+    className: tryOnColors[0].className,
+  });
   const [cameraState, setCameraState] = useState<"idle" | "starting" | "active" | "error">("idle");
   const [cameraError, setCameraError] = useState("");
   const [snapshotMessage, setSnapshotMessage] = useState("");
