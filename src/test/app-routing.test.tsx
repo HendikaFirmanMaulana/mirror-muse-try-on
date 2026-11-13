@@ -3,7 +3,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 
 import { routeTree } from "@/routeTree.gen";
-import { tryOnCategories } from "@/lib/try-on-data";
+import { getDefaultTryOnSelection, tryOnCategories } from "@/lib/try-on-data";
 
 // Match routes without running loaders or rendering: loaders may need a server or
 // network the test run lacks, and jsdom never loads the stylesheets React waits on.
@@ -26,15 +26,23 @@ describe("App routing", () => {
 
   it("provides all nine requested accessory categories", () => {
     expect(tryOnCategories.map((category) => category.name)).toEqual([
-      "Glasses",
-      "Hair",
-      "Hat",
-      "Necklace",
-      "Clothes",
-      "Watch",
-      "Bracelet",
-      "Ring",
-      "Nails",
+      "Kacamata",
+      "Rambut",
+      "Topi",
+      "Kalung",
+      "Pakaian",
+      "Jam Tangan",
+      "Gelang",
+      "Cincin",
+      "Kuku",
     ]);
+  });
+
+  it("restores the default accessory, sample, and color", () => {
+    const selection = getDefaultTryOnSelection();
+
+    expect(selection.category.name).toBe("Kacamata");
+    expect(selection.sample).toBe("Bingkai klasik");
+    expect(selection.color.name).toBe("Lilac");
   });
 });
