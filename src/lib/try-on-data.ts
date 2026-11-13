@@ -17,29 +17,47 @@ export type TryOnCategory = {
   samples: readonly string[];
 };
 
+export type TryOnColor = { name: string; className: string };
+
 export const defaultTryOnCategory: TryOnCategory = {
-  name: "Glasses",
+  name: "Kacamata",
   icon: Glasses,
-  samples: ["Sculpted", "Everyday", "Soft tint"],
+  samples: ["Bingkai klasik", "Sehari-hari", "Lensa lembut"],
 };
 
 export const tryOnCategories = [
   defaultTryOnCategory,
-  { name: "Hair", icon: Waves, samples: ["Soft wave", "Sleek", "Natural"] },
-  { name: "Hat", icon: Crown, samples: ["Weekend cap", "Wide brim", "Soft bucket"] },
-  { name: "Necklace", icon: Gem, samples: ["Mini pendant", "Layered chain", "Pearl strand"] },
-  { name: "Clothes", icon: Shirt, samples: ["Essential knit", "Relaxed shirt", "Studio jacket"] },
-  { name: "Watch", icon: Watch, samples: ["Minimal dial", "Modern metal", "Sport classic"] },
-  { name: "Bracelet", icon: CircleDot, samples: ["Slim chain", "Beaded", "Soft cuff"] },
-  { name: "Ring", icon: Circle, samples: ["Sculpted dome", "Stacking", "Classic signet"] },
-  { name: "Nails", icon: Paintbrush, samples: ["Short almond", "Soft square", "Classic round"] },
+  { name: "Rambut", icon: Waves, samples: ["Gelombang lembut", "Lurus rapi", "Alami"] },
+  { name: "Topi", icon: Crown, samples: ["Topi kasual", "Tepi lebar", "Bucket lembut"] },
+  { name: "Kalung", icon: Gem, samples: ["Liontin mini", "Rantai berlapis", "Rangkaian mutiara"] },
+  { name: "Pakaian", icon: Shirt, samples: ["Rajut esensial", "Kemeja santai", "Jaket studio"] },
+  { name: "Jam Tangan", icon: Watch, samples: ["Dial minimalis", "Logam modern", "Klasik sporty"] },
+  { name: "Gelang", icon: CircleDot, samples: ["Rantai ramping", "Manik-manik", "Gelang lembut"] },
+  { name: "Cincin", icon: Circle, samples: ["Kubah pahatan", "Cincin susun", "Signet klasik"] },
+  { name: "Kuku", icon: Paintbrush, samples: ["Almond pendek", "Kotak lembut", "Bulat klasik"] },
 ] as const satisfies readonly [TryOnCategory, ...TryOnCategory[]];
 
-export const tryOnColors = [
+export const tryOnColors: readonly TryOnColor[] = [
   { name: "Lilac", className: "bg-swatch-lilac" },
-  { name: "Rose", className: "bg-swatch-rose" },
-  { name: "Ink", className: "bg-swatch-ink" },
+  { name: "Mawar", className: "bg-swatch-rose" },
+  { name: "Hitam", className: "bg-swatch-ink" },
   { name: "Sage", className: "bg-swatch-sage" },
-  { name: "Silver", className: "bg-swatch-silver" },
+  { name: "Perak", className: "bg-swatch-silver" },
   { name: "Amber", className: "bg-swatch-amber" },
-] as const;
+];
+
+export const hairColors: readonly TryOnColor[] = [
+  { name: "Hitam", className: "bg-swatch-ink" },
+  { name: "Cokelat", className: "bg-swatch-amber" },
+  { name: "Mawar", className: "bg-swatch-rose" },
+  { name: "Lilac", className: "bg-swatch-lilac" },
+  { name: "Sage", className: "bg-swatch-sage" },
+];
+
+export function getDefaultTryOnSelection() {
+  return {
+    category: defaultTryOnCategory,
+    sample: defaultTryOnCategory.samples[0],
+    color: tryOnColors[0],
+  };
+}

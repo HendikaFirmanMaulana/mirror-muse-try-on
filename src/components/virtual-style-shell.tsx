@@ -7,7 +7,7 @@ export function VirtualHeader({ workspace = false }: { workspace?: boolean }) {
   return (
     <header className="border-b border-border bg-background">
       <div className="mx-auto flex min-h-[72px] max-w-[1320px] items-center justify-between gap-4 px-6 sm:px-10 lg:px-12">
-        <Link to="/" className="inline-flex min-h-11 items-center gap-2.5" aria-label="Virtual Try-On AI home">
+        <Link to="/" className="inline-flex min-h-11 items-center gap-2.5" aria-label="Beranda Virtual Try-On AI">
           <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground">
             <Sparkles className="size-[17px]" aria-hidden="true" />
           </span>
@@ -18,20 +18,20 @@ export function VirtualHeader({ workspace = false }: { workspace?: boolean }) {
         {workspace ? (
           <Button asChild variant="outline" size="sm" className="rounded-md px-3 sm:px-4">
             <Link to="/">
-              <span aria-hidden="true">←</span> <span>Back to home</span>
+              <span aria-hidden="true">←</span> <span>Kembali ke beranda</span>
             </Link>
           </Button>
         ) : (
-          <nav className="flex items-center gap-3 sm:gap-6" aria-label="Main navigation">
+          <nav className="flex items-center gap-3 sm:gap-6" aria-label="Navigasi utama">
             <a
               href="#discover"
               className="hidden min-h-10 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
             >
-              Discover
+              Jelajahi
             </a>
             <Button asChild size="sm" className="rounded-md px-3 sm:px-4">
               <Link to="/try-on">
-                <span>Enter studio</span> <ArrowUpRight aria-hidden="true" />
+                <span>Masuk studio</span> <ArrowUpRight aria-hidden="true" />
               </Link>
             </Button>
           </nav>
@@ -51,7 +51,7 @@ export function VirtualFooter() {
           </span>
           Virtual Try-On AI
         </Link>
-        <p>Find the details that feel like you.</p>
+        <p>Temukan detail yang paling mencerminkan dirimu.</p>
       </div>
     </footer>
   );
